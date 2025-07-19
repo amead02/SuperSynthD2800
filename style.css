@@ -1,0 +1,294 @@
+/*
+  Styles for the SuperSynth DelayThing 2800 using the provided hardware
+  image as a backdrop.  The control panels are overlaid on top of the
+  black rectangles, and the keyboard overlay is positioned over the
+  keyboard area.  UI elements are styled to evoke a more tactile,
+  realistic look with gradients and shadows.
+*/
+
+body {
+  /* Use the generated Persian rug texture as the page background to
+     simulate the synth sitting on a richly patterned carpet.  The
+     image is scaled to cover the viewport and repeat if necessary. */
+  background-image: url('persian_rug.png');
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+}
+
+/* Main container shows the uploaded synth photo as its background.  A
+   fixed size is used to maintain the aspect ratio and ensure controls
+   align nicely. */
+#synth-container {
+  position: relative;
+  width: 900px;
+  height: 600px;
+  /* Use the latest panel photograph provided by the user.  The
+     supersynth image includes a dedicated dark region for controls and a
+     white region for the keyboard. */
+  background-image: url('SupersynthP4.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* Control panel overlay.  Positioned within the top half of the synth
+   where the black rectangles reside.  Four panels are spaced evenly. */
+#control-panel {
+  position: absolute;
+  /* Position the control overlay to sit within the raised dark
+     rectangle on the new background.  These values were estimated
+     based on the scaled dimensions (900×600) of the supplied PNG. */
+  /* Slightly shrink the bounding region (about 90% of its previous
+     size) so the panels fit more comfortably within the raised black
+     area. */
+  top: 110px;
+  left: 120px;
+  right: 120px;
+  height: 180px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  z-index: 2; /* Place controls above the keyboard overlay */
+}
+
+/* Each panel groups related controls.  A semi‑transparent dark
+   background helps controls stand out while still showing the photo
+   underneath. */
+#control-panel .panel {
+  flex: 1;
+  /* Use a simple grid layout to stack controls neatly.  The grid
+     implicitly creates rows for each element.  Panels 1 and 2
+     primarily rely on the default row‑based stacking.  Panel 3 uses
+     a different internal layout defined below for `.control-group`. */
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 6px;
+  justify-items: center;
+  /* Slightly translucent background so the rectangle outline is still visible
+     underneath. */
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 12px 8px;
+  box-sizing: border-box;
+  color: #fff;
+  text-align: center;
+}
+
+/* Within the delay panel (panel 3) each control group arranges its label,
+   slider and value horizontally to conserve vertical space.  Flexbox
+   ensures the slider expands while the label and value maintain
+   intrinsic width. */
+#panel-3 .control-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 6px;
+}
+#panel-3 .control-group label {
+  flex: 0 0 auto;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #ddd;
+  text-align: right;
+}
+#panel-3 .control-group input[type="range"] {
+  flex: 1 1 auto;
+  margin: 0;
+}
+#panel-3 .control-group span {
+  flex: 0 0 auto;
+  font-size: 0.7rem;
+  min-width: 32px;
+  color: #bbb;
+  text-align: left;
+}
+
+/* Labels and value spans within panels */
+#control-panel label {
+  font-size: 0.75rem;
+  margin: 4px 0;
+  font-weight: 600;
+  color: #ddd;
+}
+
+#control-panel span {
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  color: #bbb;
+}
+
+/* Octave controls layout */
+.octave-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.octave-controls span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Button styling for a tactile feel */
+button {
+  background: linear-gradient(180deg, #666, #444);
+  color: #fff;
+  border: 1px solid #222;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: inset 0 -2px 0 #222;
+  transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+  background: linear-gradient(180deg, #777, #555);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 0 0 #222;
+}
+
+/* Select dropdown styling */
+select {
+  background: linear-gradient(180deg, #666, #444);
+  color: #fff;
+  border: 1px solid #222;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+/* Range sliders styled to look like knobs with circular handles */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  outline: none;
+  margin-bottom: 4px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle at 30% 30%, #eee, #999);
+  border: 1px solid #222;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle at 30% 30%, #eee, #999);
+  border: 1px solid #222;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Reset button in the delay panel */
+.reset-button {
+  background: linear-gradient(180deg, #c24d4a, #a23733);
+  color: #fff;
+  border: 1px solid #722222;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+  transition: background 0.2s, transform 0.1s;
+  width: 100%;
+  margin-top: 8px;
+}
+.reset-button:hover {
+  background: linear-gradient(180deg, #d65d5a, #b54542);
+}
+.reset-button:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Keyboard overlay sits above the wooden keyboard in the photo.  Keys are
+   transparent by default so that the image below remains visible. */
+#keyboard {
+  position: absolute;
+  /* Place the keyboard inside the white rectangle on the new
+     background.  This white region is roughly 170 px tall and
+     inset from the left/right edges by about 80 px. */
+  left: 80px;
+  right: 80px;
+  bottom: 60px;
+  height: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.key {
+  position: relative;
+  margin: 0 1px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.key.white {
+  width: 50px;
+  height: 170px;
+  background-color: #f9f9f9;
+  border: 1px solid #aaa;
+  border-bottom: 4px solid #888;
+  border-radius: 4px;
+}
+
+.key.black {
+  width: 30px;
+  height: 110px;
+  background-color: #222;
+  border: 1px solid #000;
+  border-bottom: 4px solid #333;
+  margin-left: -15px;
+  margin-right: -15px;
+  border-radius: 3px;
+  z-index: 3;
+}
+
+.key.active.white {
+  /* Highlight pressed white key with a translucent yellow tint so
+     activation is visible over the photo. */
+  background-color: rgba(255, 255, 0, 0.4);
+}
+
+.key.active.black {
+  /* Highlight pressed black key similarly. */
+  background-color: rgba(255, 255, 0, 0.6);
+}
+
+/* Hide note labels for a cleaner appearance */
+.key span {
+  display: none;
+}

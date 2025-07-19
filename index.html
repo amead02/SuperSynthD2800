@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SuperSynth DelayThing 2800</title>
+    <!-- Apply custom styling for a realistic, hardware‑inspired interface -->
+    <link rel="stylesheet" href="style.css?v=2" />
+  </head>
+  <body>
+    <div id="synth-container">
+      <!-- Control panel: four sections aligned with the rectangles on the
+           provided hardware image.  Each panel holds related controls. -->
+      <div id="control-panel">
+        <!-- Panel 1: waveform and filter cutoff -->
+        <div class="panel" id="panel-1">
+          <label for="waveform">Waveform</label>
+          <select id="waveform">
+            <option value="sine">Sine</option>
+            <option value="sawtooth">Saw</option>
+          </select>
+          <label for="filterCutoff">Cutoff (Hz)</label>
+          <input
+            id="filterCutoff"
+            type="range"
+            min="100"
+            max="10000"
+            value="5000"
+            step="10"
+          />
+          <span id="filterDisplay">5000</span>
+        </div>
+        <!-- Panel 2: octave and reverb -->
+        <div class="panel" id="panel-2">
+          <label>Octave</label>
+          <div class="octave-controls">
+            <button id="octaveDown" title="Octave down">−</button>
+            <span id="octaveDisplay">4</span>
+            <button id="octaveUp" title="Octave up">+</button>
+          </div>
+          <label for="reverb">Reverb (%)</label>
+          <input
+            id="reverb"
+            type="range"
+            min="0"
+            max="100"
+            value="0"
+            step="1"
+          />
+          <span id="reverbDisplay">0</span>
+        </div>
+        <!-- Panel 3: delay controls.  To conserve vertical space within the
+             control area, each control (label, slider and value) is
+             arranged in a horizontal row using the `.control-group`
+             wrapper. -->
+        <div class="panel" id="panel-3">
+          <div class="control-group">
+            <label for="delayTime">Delay (ms)</label>
+            <input
+              id="delayTime"
+              type="range"
+              min="10"
+              max="1000"
+              value="200"
+              step="1"
+            />
+            <span id="delayTimeDisplay">200</span>
+          </div>
+          <!-- Stop & Reset button to immediately halt all oscillators and
+               return controls to their default values.  Placed at the
+               bottom of the delay panel to fit within the existing
+               bounding box. -->
+          <button id="resetButton" class="reset-button">Stop + Reset</button>
+          <div class="control-group">
+            <label for="feedback">Feedback (%)</label>
+            <input
+              id="feedback"
+              type="range"
+              min="0"
+              max="95"
+              value="30"
+              step="1"
+            />
+            <span id="feedbackDisplay">30</span>
+          </div>
+          <div class="control-group">
+            <label for="mix">Mix (%)</label>
+            <input
+              id="mix"
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              step="1"
+            />
+            <span id="mixDisplay">50</span>
+          </div>
+        </div>
+      </div>
+      <!-- The keyboard overlay.  Keys are transparent and sit over the
+           keyboard image. -->
+      <div id="keyboard"></div>
+    </div>
+    <!-- Add a version query string to bust the browser cache whenever the
+         script changes, ensuring that updates to the file are picked up.  
+         The `type` attribute is specified for clarity. -->
+    <script type="text/javascript" src="script.js?v=3" defer></script>
+  </body>
+</html>
